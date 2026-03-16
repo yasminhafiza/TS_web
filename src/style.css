@@ -6,11 +6,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    /* Transisi halus saat ganti tema */
-    @apply transition-colors duration-500;
+    /* HAPUS transition-colors — ini penyebab flash saat load */
   }
 
-  /* Default Light Mode */
   html {
     background-color: #f8fbff;
     @apply font-sans leading-relaxed;
@@ -29,7 +27,6 @@
     @apply tracking-tight;
   }
 
-  /* Dark Mode Override */
   html.dark {
     background-color: #000524;
     color-scheme: dark;
@@ -39,7 +36,6 @@
     @apply text-white;
   }
 
-  /* Scrollbar Adaptif */
   ::-webkit-scrollbar {
     width: 8px;
   }

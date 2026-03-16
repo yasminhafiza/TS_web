@@ -13,13 +13,13 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4" ref="gridRef">
-        
+
         <div class="md:col-span-2 md:row-span-2 group relative bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:border-[#ff1e42]/50 shadow-sm">
           <div class="relative z-10">
             <TrendingUp class="w-8 h-8 text-[#ff1e42] mb-6" />
             <h3 class="text-xl font-black text-slate-900 dark:text-white uppercase italic">Process Automation</h3>
           </div>
-          
+
           <div class="space-y-6 mt-12 relative z-10">
             <div v-for="stat in impactStats" :key="stat.label">
               <div class="flex justify-between items-end mb-1">
@@ -82,20 +82,39 @@ const headRef = ref(null)
 const gridRef = ref(null)
 
 onMounted(() => {
-  gsap.from(headRef.value, {
-    x: -50, opacity: 0, duration: 1, ease: 'power3.out',
-    scrollTrigger: { trigger: headRef.value, start: 'top 90%' }
-  })
-  
-  gsap.from('.grid > div', {
-    y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power2.out',
-    scrollTrigger: { trigger: gridRef.value, start: 'top 85%' }
-  })
+  setTimeout(() => {
+    ScrollTrigger.refresh()
+
+    gsap.fromTo(headRef.value,
+      { x: -50, opacity: 0 },
+      {
+        x: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: {
+          trigger: headRef.value,
+          start: 'top 95%',
+          once: true,
+          invalidateOnRefresh: true
+        }
+      }
+    )
+
+    gsap.fromTo('.grid > div',
+      { y: 30, opacity: 0 },
+      {
+        y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: {
+          trigger: gridRef.value,
+          start: 'top 95%',
+          once: true,
+          invalidateOnRefresh: true
+        }
+      }
+    )
+  }, 100)
 })
 </script>
 
 <style scoped>
-/* Menghapus gaya 3D yang berat untuk performa dan tampilan lebih clean */
 .grid > div {
   transition: transform 0.3s ease;
 }

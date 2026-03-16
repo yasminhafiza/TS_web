@@ -14,8 +14,6 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
         <div class="relative group w-full">
-      
-          
           <h2 class="text-4xl md:text-5xl font-[1000] text-slate-800 dark:text-white mb-8 tracking-tight leading-[1.2] uppercase italic">
             TECHNOLOGY <br/>
             DRIVEN BY <br/>
@@ -55,13 +53,15 @@
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#ff1e42]/10 blur-[120px] animate-pulse"></div>
 
           <div class="grid grid-cols-2 gap-4 relative z-10 rotate-y-[-10deg] hover:rotate-y-0 transition-all duration-1000">
-            <div v-for="(stat, idx) in stats" :key="idx" 
-                 :class="[
-                   'stat-card group relative p-6 rounded-none border-r-2 border-b-2 bg-white dark:bg-blue-900/10 border-slate-300 dark:border-blue-400/10 backdrop-blur-xl transition-all duration-500',
-                   idx % 2 === 1 ? 'translate-y-8' : ''
-                 ]">
+            <div 
+              v-for="(stat, idx) in stats" 
+              :key="idx" 
+              :class="[
+                'stat-card group relative p-6 rounded-none border-r-2 border-b-2 bg-white dark:bg-blue-900/10 border-slate-300 dark:border-blue-400/10 backdrop-blur-xl transition-all duration-500',
+                idx % 2 === 1 ? 'translate-y-8' : ''
+              ]"
+            >
               <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-slate-400 dark:border-white/20 group-hover:border-[#ff1e42]"></div>
-         
               
               <div class="text-3xl md:text-5xl font-black text-slate-800 dark:text-white mb-1 tracking-tighter transition-all italic group-hover:text-[#ff1e42]">
                 {{ stat.value }}
@@ -77,15 +77,19 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ShieldCheck } from 'lucide-vue-next'
-
-
+const values = [
+  { title: 'Technical Precision' },
+  { title: 'Social Empathy' },
+  { title: 'Safety Protocol' },
+  { title: 'Human Integrity' }
+]
 
 const stats = [
   { value: '15+', label: 'Years Experience' },

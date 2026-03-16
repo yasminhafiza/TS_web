@@ -60,7 +60,7 @@
                :style="{ transform: `translateZ(100px) translateY(${powerLevel * -20}px)` }">
             
             <div class="relative w-48 h-48 [transform-style:preserve-3d]">
-              <div class="absolute inset-0 bg-slate-900 dark:bg-white/5 rounded-none border border-[#ff1e42]/30 flex items-center justify-center text-[#ff1e42] backdrop-blur-xl group-hover:shadow-[0_0_50px_rgba(255,30,66,0.2)]">
+              <div class="absolute inset-0 bg-slate-900 dark:bg-white/5 rounded-none border border-[#ff1e42]/30 flex items-center justify-center text-[#ff1e42] backdrop-blur-xl">
                 <Rocket class="w-20 h-20 transition-all duration-500" 
                         :class="powerLevel === 3 ? 'animate-wiggle text-white shadow-glow' : ''" />
               </div>
@@ -90,8 +90,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router' 
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Rocket, ArrowRight, Mail, Zap } from 'lucide-vue-next'
@@ -104,7 +104,7 @@ const powerLevel = ref(0)
 
 const powerUp = (val) => {
   if (powerLevel.value < val) powerLevel.value = val
-  else powerLevel.value = 0 // reset if clicking lower or current
+  else powerLevel.value = 0
 }
 
 const goToConsultation = () => {
@@ -125,10 +125,16 @@ const onReset = () => {
 }
 
 onMounted(() => {
-  gsap.from(ctaCard.value, {
-    y: 100, opacity: 0, duration: 1.5, ease: 'expo.out',
-    scrollTrigger: { trigger: ctaCard.value, start: 'top 90%' }
-  })
+  setTimeout(() => {
+    ScrollTrigger.refresh()
+    gsap.fromTo(ctaCard.value,
+      { y: 100, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 1.5, ease: 'expo.out',
+        scrollTrigger: { trigger: ctaCard.value, start: 'top 95%', once: true, invalidateOnRefresh: true }
+      }
+    )
+  }, 100)
 })
 </script>
 
@@ -139,27 +145,20 @@ onMounted(() => {
     linear-gradient(to right, rgba(255, 30, 66, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 30, 66, 0.05) 1px, transparent 1px);
 }
-
 @keyframes float {
   0%, 100% { transform: translateZ(150px) translateY(0); }
   50% { transform: translateZ(150px) translateY(-20px); }
 }
-
 @keyframes float-slow {
   0%, 100% { transform: translateZ(130px) translateY(0); }
   50% { transform: translateZ(130px) translateY(15px); }
 }
-
 @keyframes wiggle {
   0%, 100% { transform: rotate(-3deg); }
   50% { transform: rotate(3deg); }
 }
-
 .animate-float { animation: float 5s ease-in-out infinite; }
 .animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
 .animate-wiggle { animation: wiggle 0.2s ease-in-out infinite; }
-
-.shadow-glow {
-  filter: drop-shadow(0 0 15px rgba(255, 30, 66, 1));
-}
+.shadow-glow { filter: drop-shadow(0 0 15px rgba(255, 30, 66, 1)); }
 </style>

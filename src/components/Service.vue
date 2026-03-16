@@ -17,13 +17,13 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 services-grid">
-        <div 
-          v-for="(service, index) in services" 
-          :key="service.id" 
-          class="service-card opacity-0 translate-y-12"
+        <div
+          v-for="(service, index) in services"
+          :key="service.id"
+          class="service-card"
           :style="{ zIndex: openCard === index ? 50 : 10 }"
         >
-          <div 
+          <div
             class="group h-full p-8 rounded-none border-b-4 border-r-4 border-slate-200 dark:border-blue-900/30 bg-white dark:bg-[#000a3d]/40 backdrop-blur-3xl transition-all duration-500 flex flex-col relative overflow-hidden"
             :ref="el => { if (el) cardRefs[index] = el }"
             @mousemove="handleTilt($event, index)"
@@ -41,21 +41,21 @@
             <h3 class="text-2xl font-[1000] mb-3 text-slate-900 dark:text-white italic uppercase tracking-tighter group-hover:text-[#ff1e42] transition-colors">
               {{ service.title }}
             </h3>
-            
+
             <p class="text-[11px] text-slate-500 dark:text-blue-200/60 mb-8 font-black uppercase tracking-widest leading-relaxed border-l-2 border-slate-200 dark:border-blue-800/50 pl-4">
               {{ service.subtitle }}
             </p>
 
             <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-              <span v-for="tag in service.mainTags" :key="tag" 
+              <span v-for="tag in service.mainTags" :key="tag"
                 class="text-[9px] font-black px-3 py-1 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-blue-300 border border-transparent dark:group-hover:border-[#ff1e42]/30 transition-all">
                 # {{ tag }}
               </span>
             </div>
 
-            <button 
+            <button
               type="button"
-              @click.prevent="toggleDetail(index)" 
+              @click.prevent="toggleDetail(index)"
               class="mt-10 pt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between group/btn cursor-pointer w-full relative z-30"
             >
               <span class="text-[10px] font-black tracking-[0.3em] text-slate-400 group-hover/btn:text-[#ff1e42] transition-colors">
@@ -121,12 +121,12 @@ const handleTilt = (e, i) => {
 const resetTilt = (i) => {
   const card = cardRefs.value[i]
   if (card) {
-    gsap.to(card, { 
-      rotateY: 0, 
-      rotateX: 0, 
+    gsap.to(card, {
+      rotateY: 0,
+      rotateX: 0,
       scale: 1,
-      duration: 1, 
-      ease: 'elastic.out(1, 0.6)' 
+      duration: 1,
+      ease: 'elastic.out(1, 0.6)'
     })
   }
 }
@@ -204,24 +204,32 @@ const services = [
 ]
 
 onMounted(() => {
-  gsap.to('.service-card', {
-    scrollTrigger: {
-      trigger: '.services-grid',
-      start: 'top 85%',
-    },
-    opacity: 1,
-    y: 0,
-    stagger: 0.1,
-    duration: 1,
-    ease: 'expo.out'
-  })
+  setTimeout(() => {
+    ScrollTrigger.refresh()
+    gsap.fromTo('.service-card',
+      { opacity: 0, y: 40 },
+      {
+        scrollTrigger: {
+          trigger: '.services-grid',
+          start: 'top 95%',
+          once: true,
+          invalidateOnRefresh: true
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 1,
+        ease: 'expo.out'
+      }
+    )
+  }, 100)
 })
 </script>
 
 <style scoped>
 .tech-grid {
   background-size: 40px 40px;
-  background-image: 
+  background-image:
     linear-gradient(to right, currentColor 1px, transparent 1px),
     linear-gradient(to bottom, currentColor 1px, transparent 1px);
 }

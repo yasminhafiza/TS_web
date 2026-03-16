@@ -1,6 +1,6 @@
 <template>
   <section id="why-choose-us" class="relative w-full px-6 py-32 overflow-hidden bg-[#eef2f7] dark:bg-[#000830] transition-colors duration-500">
-    
+
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute rounded-full blur-[120px] w-[600px] h-[600px] bg-[#ff1e42]/5 dark:bg-[#ff1e42]/10 top-[-10%] right-[-5%]" aria-hidden="true"></div>
       <div class="absolute rounded-full blur-[120px] w-[500px] h-[500px] bg-blue-400/10 dark:bg-blue-900/10 bottom-[-10%] left-[-5%]" aria-hidden="true"></div>
@@ -9,16 +9,14 @@
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto">
-      
-      <div class="text-center mb-24" ref="headRef">
-      
-<h2 class="text-4xl md:text-7xl font-[1000] text-slate-900 dark:text-white leading-[1.2] mb-8 uppercase tracking-tighter italic">
-  <span class="inline-block">WHY PARTNER</span> <br/>
-  <span class="relative inline-block py-3 pr-6 text-transparent bg-clip-text bg-gradient-to-r from-[#ff1e42] to-rose-400 drop-shadow-[0_0_15px_rgba(255,30,66,0.3)]">
-    WITH OUR EXPERTISE?
-  </span>
-</h2>
 
+      <div class="text-center mb-24" ref="headRef">
+        <h2 class="text-4xl md:text-7xl font-[1000] text-slate-900 dark:text-white leading-[1.2] mb-8 uppercase tracking-tighter italic">
+          <span class="inline-block">WHY PARTNER</span> <br/>
+          <span class="relative inline-block py-3 pr-6 text-transparent bg-clip-text bg-gradient-to-r from-[#ff1e42] to-rose-400 drop-shadow-[0_0_15px_rgba(255,30,66,0.3)]">
+            WITH OUR EXPERTISE?
+          </span>
+        </h2>
         <p class="text-slate-500 dark:text-blue-200/60 max-w-2xl mx-auto text-[10px] font-black uppercase tracking-[0.2em] leading-relaxed italic">
           >> INITIALIZING SYSTEM: Integrated technology ecosystems for zero-friction business operations. _
         </p>
@@ -41,13 +39,12 @@
               <div class="w-16 h-16 bg-slate-900 dark:bg-white/5 border border-slate-800 dark:border-white/10 flex items-center justify-center transition-all duration-500 group-hover:bg-[#ff1e42] group-hover:shadow-[0_0_30px_rgba(255,30,66,0.5)] group-hover:rotate-[15deg]">
                 <component :is="feature.icon" class="w-8 h-8 text-[#ff1e42] group-hover:text-white transition-colors" />
               </div>
-            
             </div>
 
             <h3 class="text-2xl font-[1000] text-slate-900 dark:text-white mb-4 uppercase tracking-tighter italic group-hover:text-[#ff1e42] transition-colors">
               {{ feature.title }}
             </h3>
-            
+
             <p class="text-[10px] text-slate-600 dark:text-blue-100/50 leading-relaxed font-black uppercase tracking-widest mb-10 border-l-2 border-slate-200 dark:border-blue-900 group-hover:border-[#ff1e42] pl-4 transition-colors">
               {{ feature.description }}
             </p>
@@ -94,7 +91,7 @@ const onTilt = (e, i) => {
   const glow = glowEls.value[i]
   if (!card) return
   const b = card.getBoundingClientRect()
-  const x = (e.clientX - b.left) / b.width - 0.5 
+  const x = (e.clientX - b.left) / b.width - 0.5
   const y = (e.clientY - b.top) / b.height - 0.5
   gsap.to(card, { rotateY: x * 12, rotateX: -y * 12, scale: 1.02, duration: 0.4, ease: 'power2.out' })
   if (glow) {
@@ -114,8 +111,20 @@ const onReset = (i) => {
 let ctx
 onMounted(() => {
   ctx = gsap.context(() => {
-    gsap.from(headRef.value, { y: 60, opacity: 0, duration: 1.5, ease: 'expo.out', scrollTrigger: { trigger: headRef.value, start: 'top 90%' } })
-    gsap.from('.card-scene', { y: 80, opacity: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out', scrollTrigger: { trigger: '.grid', start: 'top 85%' } })
+    gsap.fromTo(headRef.value,
+      { y: 60, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 1.5, ease: 'expo.out',
+        scrollTrigger: { trigger: headRef.value, start: 'top 90%', once: true }
+      }
+    )
+    gsap.fromTo('.card-scene',
+      { y: 80, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: 'power4.out',
+        scrollTrigger: { trigger: '.card-scene', start: 'top 85%', once: true }
+      }
+    )
   })
 })
 onUnmounted(() => ctx?.revert())
@@ -124,7 +133,7 @@ onUnmounted(() => ctx?.revert())
 <style scoped>
 .tech-grid {
   background-size: 60px 60px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 30, 66, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 30, 66, 0.05) 1px, transparent 1px);
 }

@@ -76,10 +76,14 @@
 <script setup>
 import { ref, h, onMounted } from 'vue'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const cardRefs = ref([])
 const glowRefs = ref([])
 const headRef = ref(null)
+const gridRef = ref(null)
 
 const QuoteIcon = () => h('svg', { 
   fill: 'currentColor', 
@@ -99,16 +103,10 @@ const onTilt = (e, i) => {
   const card = cardRefs.value[i]
   const glow = glowRefs.value[i]
   if (!card) return
-
   const rect = card.getBoundingClientRect()
   const x = (e.clientX - rect.left) / rect.width - 0.5
   const y = (e.clientY - rect.top) / rect.height - 0.5
-
-  gsap.to(card, {
-    rotateY: x * 8, rotateX: -y * 8,
-    duration: 0.4, ease: 'power2.out'
-  })
-
+  gsap.to(card, { rotateY: x * 8, rotateX: -y * 8, duration: 0.4, ease: 'power2.out' })
   if (glow) {
     const gx = e.clientX - rect.left
     const gy = e.clientY - rect.top
@@ -118,21 +116,29 @@ const onTilt = (e, i) => {
 
 const onReset = (i) => {
   const card = cardRefs.value[i]
-  if (card) {
-    gsap.to(card, { rotateY: 0, rotateX: 0, duration: 1, ease: 'back.out(1.7)' })
-  }
+  if (card) gsap.to(card, { rotateY: 0, rotateX: 0, duration: 1, ease: 'back.out(1.7)' })
 }
 
 onMounted(() => {
-  gsap.from(headRef.value, { y: 20, opacity: 0, duration: 1, ease: 'power3.out' })
-  gsap.from('.testimonial-card', { 
-    y: 30, 
-    opacity: 0, 
-    stagger: 0.1, 
-    duration: 0.8, 
-    ease: 'power3.out',
-    delay: 0.2 
-  })
+  setTimeout(() => {
+    ScrollTrigger.refresh()
+
+    gsap.fromTo(headRef.value,
+      { y: 20, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: headRef.value, start: 'top 95%', once: true, invalidateOnRefresh: true }
+      }
+    )
+
+    gsap.fromTo('.testimonial-card',
+      { y: 30, opacity: 0 },
+      {
+        y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: gridRef.value, start: 'top 95%', once: true, invalidateOnRefresh: true }
+      }
+    )
+  }, 100)
 })
 </script>
 

@@ -1,29 +1,30 @@
 <template>
   <section id="clients" class="relative w-full py-24 lg:py-32 bg-white dark:bg-[#000839] overflow-hidden transition-colors duration-500">
     
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,30,66,0.05),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(255,30,66,0.08),transparent_70%)] transition-colors duration-500"></div>
-    <div class="absolute inset-0 pointer-events-none opacity-10 dark:opacity-20 transition-opacity duration-500 bg-[size:60px_60px] bg-[linear-gradient(rgba(255,30,66,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,30,66,0.05)_1px,transparent_1px)]" aria-hidden="true"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,30,66,0.05),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(255,30,66,0.08),transparent_70%)]"></div>
+    <div class="absolute inset-0 pointer-events-none opacity-10 dark:opacity-20 bg-[size:60px_60px] bg-[linear-gradient(rgba(255,30,66,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,30,66,0.05)_1px,transparent_1px)]" aria-hidden="true"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6">
       
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 gsap-header">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 gsap-header" ref="headerRef">
         <div class="max-w-2xl">
           <div class="flex items-center gap-3 mb-4">
             <span class="w-12 h-[1px] bg-[#ff1e42]"></span>
             <span class="text-[11px] font-bold text-[#ff1e42] uppercase tracking-[0.3em]">Global Partnerships</span>
           </div>
-          <h2 class="text-4xl md:text-6xl font-black text-slate-800 dark:text-white leading-none tracking-tighter transition-colors duration-500">
+          <h2 class="text-4xl md:text-6xl font-black text-slate-800 dark:text-white leading-none tracking-tighter">
             OUR <br/>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff1e42] to-[#ff8095]">CLIENTS.</span>
           </h2>
         </div>
-        <p class="text-slate-500 dark:text-slate-300 max-w-xs text-sm leading-relaxed border-l border-slate-200 dark:border-white/10 pl-6 uppercase tracking-wider font-medium transition-colors duration-500">
+        <p class="text-slate-500 dark:text-slate-300 max-w-xs text-sm leading-relaxed border-l border-slate-200 dark:border-white/10 pl-6 uppercase tracking-wider font-medium">
           Collaborating with industry leaders to deliver high-level operational excellence and innovation.
         </p>
       </div>
 
       <div class="relative flex overflow-hidden py-12 mask-fade">
-        <div class="flex flex-nowrap gap-24 animate-marquee items-center"> <div 
+        <div class="flex flex-nowrap gap-24 animate-marquee items-center">
+          <div 
             v-for="(client, index) in [...clients, ...clients]" 
             :key="index"
             class="flex-shrink-0 w-80 h-40 relative group flex items-center justify-center"
@@ -56,6 +57,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const headerRef = ref(null)
+
 const clients = ref([
   { id: 1, name: 'Global Makara Teknik', logo: new URL('../assets/logo/GMT.png', import.meta.url).href },
   { id: 2, name: 'Ombilin Fusi Nusantara', logo: new URL('../assets/logo/OFN.png', import.meta.url).href },
@@ -66,16 +69,16 @@ const clients = ref([
 ])
 
 onMounted(() => {
-  gsap.from('.gsap-header', {
-    scrollTrigger: {
-      trigger: '#clients',
-      start: 'top 80%',
-    },
-    y: 40,
-    opacity: 0,
-    duration: 1.2,
-    ease: 'power4.out'
-  })
+  setTimeout(() => {
+    ScrollTrigger.refresh()
+    gsap.fromTo(headerRef.value,
+      { y: 40, opacity: 0 },
+      {
+        y: 0, opacity: 1, duration: 1.2, ease: 'power4.out',
+        scrollTrigger: { trigger: headerRef.value, start: 'top 95%', once: true, invalidateOnRefresh: true }
+      }
+    )
+  }, 100)
 })
 </script>
 
@@ -83,24 +86,19 @@ onMounted(() => {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite; /* Kecepatan sedikit diperlambat karena logo besar */
+  animation: marquee 40s linear infinite;
 }
-
 .animate-marquee:hover {
   animation-play-state: paused;
 }
-
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
 .mask-fade {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
-
 .group:hover img {
-  /* Bayangan halus agar logo terlihat menonjol */
   filter: drop-shadow(0 20px 30px rgba(0,0,0,0.12));
 }
 </style>
