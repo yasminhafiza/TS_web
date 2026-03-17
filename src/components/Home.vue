@@ -12,9 +12,6 @@
         <AboutSection />
       </section>
 
-      <section id="why-choose" class="relative">
-        <WhyChooseUs />
-      </section>
 
       <div class="bg-slate-50/50 dark:bg-[#000a3d]/30 py-20 space-y-32">
         <section id="impacts" class="relative">
@@ -29,6 +26,9 @@
         <ClientTrust />
         <PartnerCloud class="mt-20" />
       </div>
+      <section id="why-choose" class="relative">
+        <WhyChooseUs />
+      </section>
 
       <CTASection />
     </main>
@@ -46,11 +46,11 @@ import Navbar from './Navbar.vue'
 import Hero from './Hero.vue'
 import Service from './Service.vue'
 import AboutSection from './AboutSection.vue'
-import WhyChooseUs from './WhyChooseUs.vue'
 import OurImpacts from './OurImpacts.vue'
 import Testimonials from './Testimonials.vue'
 import PartnerCloud from './PartnerCloud.vue'
 import ClientTrust from './ClientTrust.vue'
+import WhyChooseUs from './WhyChooseUs.vue'
 import CTASection from './CTASection.vue'
 import FooterSection from './FooterSection.vue'
 import AIChatWidget from './AIChatWidget.vue'

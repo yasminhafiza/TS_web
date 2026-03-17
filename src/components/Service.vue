@@ -1,82 +1,89 @@
 <template>
-  <section id="services" class="py-24 bg-white dark:bg-[#000830] relative overflow-hidden transition-colors duration-500">
-    <div class="absolute inset-0 pointer-events-none opacity-40">
-      <div class="absolute top-[-10%] -right-24 w-[500px] h-[500px] bg-[#ff1e42]/10 rounded-full blur-[120px]"></div>
-      <div class="absolute bottom-[-10%] -left-24 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[120px]"></div>
-      <div class="absolute inset-0 tech-grid opacity-[0.05] dark:opacity-[0.1]"></div>
+  <section id="services" class="py-32 bg-slate-50 dark:bg-[#020410] relative overflow-hidden transition-colors duration-700">
+    
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute top-[10%] left-[5%] w-32 h-32 bg-gradient-to-br from-rose-500/20 to-orange-500/20 rounded-3xl rotate-12 animate-float-slow blur-sm"></div>
+      <div class="absolute bottom-[20%] right-[10%] w-48 h-48 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-full animate-float blur-md"></div>
+      
+      <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-rose-500/[0.05] dark:bg-rose-500/[0.08] rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/[0.05] dark:bg-blue-600/[0.08] rounded-full blur-[120px]"></div>
+      
+      <div class="absolute inset-0 opacity-[0.2] dark:opacity-[0.4]" 
+           style="background-image: radial-gradient(#64748b 0.5px, transparent 0.5px); background-size: 40px 40px;">
+      </div>
     </div>
 
     <div class="container mx-auto px-6 relative z-10">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-        <div class="max-w-2xl">
-          <h2 class="text-6xl md:text-8xl font-[1000] text-slate-900 dark:text-white leading-[0.8] italic tracking-tighter uppercase">
-            OUR <br/>
-            <span class="text-[#ff1e42] drop-shadow-[0_0_15px_rgba(255,30,66,0.3)]">SERVICES</span>
-          </h2>
+      
+      <div class="flex flex-col items-center text-center mb-24 space-y-6">
+        <div class="px-4 py-1.5 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm backdrop-blur-md">
+          <span class="text-[10px] font-black uppercase tracking-[0.3em] text-rose-600 dark:text-rose-400">Expertise & Solutions</span>
         </div>
+        <h2 class="text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.8]">
+          OUR <span class="text-transparent bg-clip-text bg-gradient-to-b from-rose-500 to-rose-700">SERVICES.</span>
+        </h2>
+        <p class="max-w-xl text-slate-500 dark:text-slate-400 text-lg font-medium">
+          Integrated technology ecosystem designed to empower Indonesia's leading industries.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 services-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="(service, index) in services"
           :key="service.id"
-          class="service-card"
-          :style="{ zIndex: openCard === index ? 50 : 10 }"
+          class="group relative"
+          @mousemove="handleCardInteraction($event, index)"
+          @mouseleave="resetCardInteraction(index)"
+          :ref="el => { if (el) cardRefs[index] = el }"
         >
-          <div
-            class="group h-full p-8 rounded-none border-b-4 border-r-4 border-slate-200 dark:border-blue-900/30 bg-white dark:bg-[#000a3d]/40 backdrop-blur-3xl transition-all duration-500 flex flex-col relative overflow-hidden"
-            :ref="el => { if (el) cardRefs[index] = el }"
-            @mousemove="handleTilt($event, index)"
-            @mouseleave="resetTilt(index)"
-          >
-            <div class="absolute inset-0 bg-gradient-to-br from-[#ff1e42]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            <div class="absolute top-0 left-0 w-full h-[1px] bg-[#ff1e42]/30 group-hover:animate-scan-fast"></div>
+          <div class="relative h-full bg-white/70 dark:bg-white/[0.03] backdrop-blur-2xl border border-slate-200 dark:border-white/10 rounded-[40px] p-8 transition-all duration-500 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.05)] group-hover:shadow-rose-500/20 group-hover:dark:border-rose-500/40 overflow-hidden flex flex-col">
+            
+            <div 
+              class="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              :style="glowStyles[index]"
+            ></div>
 
-            <div class="flex justify-between items-start mb-10 relative z-10">
-              <div class="w-16 h-16 rounded-none flex items-center justify-center bg-slate-900 dark:bg-white/5 text-white group-hover:bg-[#ff1e42] group-hover:rotate-[15deg] transition-all duration-500 shadow-2xl group-hover:shadow-[#ff1e42]/50 border border-white/10">
-                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-html="service.iconPath"></svg>
+            <div class="relative z-10 mb-8">
+              <div class="relative h-48 w-full rounded-[24px] overflow-hidden mb-6 shadow-inner">
+                <img :src="service.image" :alt="service.title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div class="absolute bottom-4 left-4 w-12 h-12 rounded-xl bg-white dark:bg-rose-500 flex items-center justify-center text-slate-900 dark:text-white shadow-2xl transition-transform duration-500 group-hover:rotate-6">
+                  <component :is="service.icon" class="w-6 h-6" />
+                </div>
               </div>
-            </div>
-
-            <h3 class="text-2xl font-[1000] mb-3 text-slate-900 dark:text-white italic uppercase tracking-tighter group-hover:text-[#ff1e42] transition-colors">
-              {{ service.title }}
-            </h3>
-
-            <p class="text-[11px] text-slate-500 dark:text-blue-200/60 mb-8 font-black uppercase tracking-widest leading-relaxed border-l-2 border-slate-200 dark:border-blue-800/50 pl-4">
-              {{ service.subtitle }}
-            </p>
-
-            <div class="flex flex-wrap gap-2 mt-auto relative z-10">
-              <span v-for="tag in service.mainTags" :key="tag"
-                class="text-[9px] font-black px-3 py-1 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-blue-300 border border-transparent dark:group-hover:border-[#ff1e42]/30 transition-all">
-                # {{ tag }}
+              <span class="text-[9px] font-black uppercase tracking-widest text-rose-500">
+                {{ service.category }}
               </span>
             </div>
 
-            <button
-              type="button"
-              @click.prevent="toggleDetail(index)"
-              class="mt-10 pt-6 border-t border-slate-100 dark:border-white/10 flex items-center justify-between group/btn cursor-pointer w-full relative z-30"
-            >
-              <span class="text-[10px] font-black tracking-[0.3em] text-slate-400 group-hover/btn:text-[#ff1e42] transition-colors">
-                {{ openCard === index ? '[ MINIMIZE_DATA ]' : '[ More Details ]' }}
+            <div class="relative z-10 flex-grow space-y-4">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight">
+                {{ service.title }}
+              </h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed italic border-l-2 border-slate-100 dark:border-white/10 pl-4 group-hover:border-rose-500 transition-colors">
+                {{ service.description }}
+              </p>
+            </div>
+
+            <div class="relative z-10 mt-10 flex flex-wrap gap-2">
+              <span v-for="tag in service.tags" :key="tag" 
+                class="px-3 py-1 text-[9px] font-black rounded-lg bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-300 border border-slate-200 dark:border-white/5 uppercase tracking-tighter">
+                {{ tag }}
               </span>
-              <div class="w-8 h-8 rounded-none border border-slate-200 dark:border-white/10 flex items-center justify-center group-hover/btn:border-[#ff1e42] group-hover/btn:bg-[#ff1e42]/10 transition-all">
-                <svg class="w-4 h-4 text-slate-400 group-hover/btn:text-[#ff1e42] transition-transform duration-500" :class="{'rotate-180': openCard === index}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path d="M19 9l-7 7-7-7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
+            </div>
+
+            <button @click="openCard = openCard === index ? null : index" 
+              class="relative z-20 mt-8 w-full py-4 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black uppercase tracking-[0.2em] hover:bg-rose-600 dark:hover:bg-rose-500 hover:text-white transition-all transform active:scale-95 shadow-lg">
+              {{ openCard === index ? 'Collapse Info' : 'Explore Details' }}
             </button>
 
-            <div v-if="openCard === index" class="mt-8 space-y-4 animate-data-unfold relative z-10">
-              <div v-for="group in service.details" :key="group.title" class="p-5 bg-slate-50 dark:bg-black/40 border-l-2 border-[#ff1e42]">
-                <p class="text-[9px] font-black text-[#ff1e42] uppercase mb-4 tracking-[0.3em] flex items-center gap-2">
-                  <span class="w-1.5 h-1.5 bg-[#ff1e42]"></span>
-                  {{ group.title }}
-                </p>
+            <div v-if="openCard === index" class="mt-8 pt-8 border-t border-slate-100 dark:border-white/10 space-y-6 animate-slide-down relative z-10">
+              <div v-for="detail in service.details" :key="detail.label" class="space-y-3">
+                <h4 class="text-[10px] font-black text-rose-500 uppercase tracking-widest">{{ detail.label }}</h4>
                 <div class="grid grid-cols-1 gap-2">
-                  <div v-for="item in group.items" :key="item" class="flex items-center gap-3 text-[11px] font-bold text-slate-700 dark:text-blue-100/80 leading-tight italic uppercase">
-                    <div class="w-1 h-px bg-[#ff1e42]/50"></div>
+                  <div v-for="item in detail.items" :key="item" class="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+                    <div class="w-1 h-1 bg-rose-500 rounded-full shadow-[0_0_8px_rgba(244,63,94,0.6)]"></div>
                     {{ item }}
                   </div>
                 </div>
@@ -90,171 +97,162 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { 
+  LayoutGrid, Building2, Smartphone, 
+  Zap, Network, UserSquare2 
+} from 'lucide-vue-next'
 
-gsap.registerPlugin(ScrollTrigger)
+import imgInfrastructure from '../assets/infrasturucture.webp' 
 
 const openCard = ref(null)
 const cardRefs = ref([])
-
-const toggleDetail = (index) => {
-  openCard.value = openCard.value === index ? null : index
-}
-
-const handleTilt = (e, i) => {
-  const card = cardRefs.value[i]
-  if (!card || openCard.value === i) return
-  const rect = card.getBoundingClientRect()
-  const x = (e.clientX - rect.left) / rect.width - 0.5
-  const y = (e.clientY - rect.top) / rect.height - 0.5
-  gsap.to(card, {
-    rotateY: x * 15,
-    rotateX: -y * 15,
-    scale: 1.02,
-    transformPerspective: 1200,
-    duration: 0.4
-  })
-}
-
-const resetTilt = (i) => {
-  const card = cardRefs.value[i]
-  if (card) {
-    gsap.to(card, {
-      rotateY: 0,
-      rotateX: 0,
-      scale: 1,
-      duration: 1,
-      ease: 'elastic.out(1, 0.6)'
-    })
-  }
-}
+const glowStyles = reactive([])
 
 const services = [
   {
     id: 1,
+    icon: LayoutGrid,
     category: 'Application',
     title: 'Core ERP Systems',
-    subtitle: 'Integrated ERP solutions for asset & finance management.',
-    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />',
-    mainTags: ['Asset', 'Finance', 'HRIS'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
+    description: 'Integrated solutions for high-scale asset and financial management.',
+    tags: ['EAM', 'HRIS', 'Procurement'],
     details: [
-      { title: 'Operational', items: ['Enterprise Asset Management', 'Warehouse Management', 'Purchase Management'] },
-      { title: 'Management', items: ['Finance Management', 'Accounting Management', 'HRIS'] }
+      { label: 'Operational', items: ['Enterprise Asset Management', 'Warehouse & Inventory', 'Purchase Management', 'Production'] },
+      { label: 'Management', items: ['Finance & Accounting', 'HRIS', 'Safety Management', 'Project Service'] }
     ]
   },
   {
     id: 2,
+    icon: Building2,
     category: 'Corporate',
-    title: 'Corporate Application',
-    subtitle: 'Full administrative ecosystem and digital identity.',
-    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />',
-    mainTags: ['Email', 'Web', 'Server'],
+    title: 'Business Ecosystem',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
+    description: 'Centralized administrative services and secure digital identity.',
+    tags: ['Email', 'Web', 'Helpdesk'],
     details: [
-      { title: 'Core Services', items: ['Email System', 'Official Website', 'Service Desk', 'File Server'] }
+      { label: 'Infrastructure', items: ['Email System', 'Official Website', 'Service Desk', 'File Server'] }
     ]
   },
   {
     id: 3,
-    category: 'Innovative',
-    title: 'Web & Mobile',
-    subtitle: 'High-mobility monitoring via fleet-specific platforms.',
-    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />',
-    mainTags: ['Fleet', 'GPS', 'Real-time'],
+    icon: Smartphone,
+    category: 'Mobility',
+    title: 'Web & Mobile Apps',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop',
+    description: 'Real-time tracking and logistics automation for enterprise fleets.',
+    tags: ['GPS', 'Fleet System', 'Real-time'],
     details: [
-      { title: 'Fleet System', items: ['Fleet Management System'] }
+      { label: 'Logistics', items: ['Fleet Management System'] }
     ]
   },
   {
     id: 4,
+    icon: Zap,
     category: 'Efficiency',
     title: 'Productivity Suite',
-    subtitle: 'Modern tools for seamless team collaboration.',
-    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />',
-    mainTags: ['Office365', 'Zoom', 'Intranet'],
+    image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop',
+    description: 'Seamless collaboration tools for modern distributed teams.',
+    tags: ['Office365', 'Zoom', 'Intranet'],
     details: [
-      { title: 'Tools', items: ['Zoom Video Conference', 'Office365', 'Intranet Portal/Apps'] }
+      { label: 'Collaboration', items: ['Zoom Video Conference', 'Office365 Suite', 'Intranet Portal'] }
     ]
   },
   {
     id: 5,
+    icon: Network,
     category: 'Network',
     title: 'Infrastructure',
-    subtitle: 'Reliable network with integrated surveillance systems.',
-    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.343 6.572c5.857-5.858 15.355-5.858 21.213 0" />',
-    mainTags: ['LAN', 'CCTV', 'DNS'],
+    image: imgInfrastructure,
+    description: 'Resilient connectivity and intelligent surveillance systems.',
+    tags: ['LAN', 'CCTV', 'Security'],
     details: [
-      { title: 'Connectivity', items: ['Wired & Wireless LAN', 'Network & Security', 'DNS'] },
-      { title: 'Security', items: ['Surveillance System/CCTV'] }
+      { label: 'Connectivity', items: ['Wired & Wireless LAN', 'Network & Security', 'DNS'] },
+      { label: 'Surveillance', items: ['CCTV System'] }
     ]
   },
   {
     id: 6,
+    icon: UserSquare2,
     category: 'Support',
-    title: 'End-User Points',
-    subtitle: 'Full hardware support and daily communications.',
-    iconPath: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />',
-    mainTags: ['Devices', 'Radio', 'Windows'],
+    title: 'End User Touchpoint',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800&auto=format&fit=crop',
+    description: 'Comprehensive hardware support and communication management.',
+    tags: ['Hardware', 'Radio', 'PBX'],
     details: [
-      { title: 'Hardware', items: ['Desktop, Laptop, Printer', 'Finger Scan'] },
-      { title: 'Radio & Telp', items: ['Radio Rig & HT', 'PBX System'] }
+      { label: 'Devices', items: ['Desktop, Laptop, Printer', 'Finger Scan Attendance'] },
+      { label: 'Communication', items: ['Radio Rig & HT (Freq Mgmt)', 'Telephony & PBX System'] }
     ]
   }
 ]
 
-onMounted(() => {
-  setTimeout(() => {
-    ScrollTrigger.refresh()
-    gsap.fromTo('.service-card',
-      { opacity: 0, y: 40 },
-      {
-        scrollTrigger: {
-          trigger: '.services-grid',
-          start: 'top 95%',
-          once: true,
-          invalidateOnRefresh: true
-        },
-        opacity: 1,
-        y: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: 'expo.out'
-      }
-    )
-  }, 100)
-})
+// Initialize glow effects
+services.forEach(() => glowStyles.push({ background: '' }))
+
+const handleCardInteraction = (e, i) => {
+  const card = cardRefs.value[i]
+  if (!card) return
+  
+  const rect = card.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+
+  glowStyles[i].background = `radial-gradient(400px circle at ${x}px ${y}px, rgba(244, 63, 94, 0.15), transparent 80%)`
+
+  const rotateX = -((y / rect.height) - 0.5) * 8
+  const rotateY = ((x / rect.width) - 0.5) * 8
+  
+  gsap.to(card, {
+    rotateX, rotateY,
+    scale: 1.02,
+    duration: 0.5,
+    ease: 'power2.out',
+    transformPerspective: 1000
+  })
+}
+
+const resetCardInteraction = (i) => {
+  if (!cardRefs.value[i]) return
+  
+  gsap.to(cardRefs.value[i], {
+    rotateX: 0, rotateY: 0, scale: 1,
+    duration: 1, ease: 'elastic.out(1, 0.75)'
+  })
+}
 </script>
 
 <style scoped>
-.tech-grid {
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, currentColor 1px, transparent 1px),
-    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(10deg); }
 }
 
-@keyframes scan-fast {
-  0% { top: 0; }
-  100% { top: 100%; }
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(20px, 40px) rotate(-15deg); }
 }
 
-.group-hover\:animate-scan-fast {
-  animation: scan-fast 1.5s linear infinite;
+.animate-float {
+  animation: float 8s ease-in-out infinite;
 }
 
-.animate-data-unfold {
-  animation: unfold 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
 }
 
-@keyframes unfold {
-  from { opacity: 0; transform: scaleY(0); transform-origin: top; }
-  to { opacity: 1; transform: scaleY(1); transform-origin: top; }
+.animate-slide-down {
+  animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.service-card { perspective: 1500px; }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-.transition-all {
-  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+::selection {
+  background: #f43f5e;
+  color: white;
 }
 </style>

@@ -1,124 +1,118 @@
 <template>
-  <section id="impact-metrics" class="bg-white dark:bg-[#000830] transition-colors duration-500 relative w-full py-20 px-6 overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none opacity-20 dark:opacity-40">
-      <div class="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-[#ff1e42]/10 blur-[100px] rounded-full"></div>
-      <div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-blue-600/10 blur-[100px] rounded-full"></div>
-    </div>
-
-    <div class="relative z-10 max-w-6xl mx-auto">
-      <div class="mb-12 border-l-4 border-[#ff1e42] pl-6" ref="headRef">
-        <h2 class="text-4xl md:text-5xl font-[1000] text-slate-900 dark:text-white uppercase italic tracking-tighter leading-none mb-2">
-          OPERATIONAL <span class="text-[#ff1e42]">IMPACT</span>
+  <section id="impact" class="minimal-impact-section">
+    <div class="relative z-10 max-w-6xl mx-auto px-6">
+      
+      <div class="text-center mb-16 space-y-2" ref="headerRef">
+        <h2 class="text-4xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white uppercase italic">
+          System <span class="text-rose-500">Impact.</span>
         </h2>
+        <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto text-xs font-bold uppercase tracking-widest opacity-60">
+          High-performance infrastructure telemetry
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4" ref="gridRef">
-
-        <div class="md:col-span-2 md:row-span-2 group relative bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:border-[#ff1e42]/50 shadow-sm">
-          <div class="relative z-10">
-            <TrendingUp class="w-8 h-8 text-[#ff1e42] mb-6" />
-            <h3 class="text-xl font-black text-slate-900 dark:text-white uppercase italic">Process Automation</h3>
-          </div>
-
-          <div class="space-y-6 mt-12 relative z-10">
-            <div v-for="stat in impactStats" :key="stat.label">
-              <div class="flex justify-between items-end mb-1">
-                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">{{ stat.label }}</span>
-                <span class="text-2xl font-[1000] text-slate-900 dark:text-white italic leading-none">{{ stat.value }}{{ stat.suffix }}</span>
-              </div>
-              <div class="h-1 w-full bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
-                <div class="h-full bg-[#ff1e42] transition-all duration-1000" :style="{ width: stat.progress + '%' }"></div>
-              </div>
+      <div class="metrics-grid" ref="listRef">
+        <div v-for="(stat, index) in stats" :key="index" class="metric-item group">
+          
+          <div class="flex items-center gap-3 mb-1">
+            <component :is="stat.icon" class="w-4 h-4 text-rose-500/50 group-hover:text-rose-500 transition-colors" />
+            <div class="flex items-baseline">
+              <span class="text-5xl font-black tracking-tighter text-slate-900 dark:text-white counter italic" 
+                    :data-target="stat.value" 
+                    :data-decimals="stat.decimals">
+                0
+              </span>
+              <span class="text-lg font-black text-rose-500 ml-1">{{ stat.suffix }}</span>
             </div>
           </div>
-          <TrendingUp class="absolute -bottom-10 -right-10 w-48 h-48 opacity-[0.03] text-slate-900 dark:text-white pointer-events-none" />
-        </div>
 
-        <div class="group relative bg-slate-950 p-8 flex flex-col justify-center border-b-4 border-[#ff1e42]">
-          <ShieldCheck class="w-6 h-6 text-[#ff1e42] mb-4" />
-          <span class="text-4xl font-[1000] text-white italic tracking-tighter leading-none">99.9%</span>
-          <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-2">Uptime Reliability</p>
-        </div>
-
-        <div class="group relative bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-8 flex flex-col justify-center transition-all hover:bg-white dark:hover:bg-white/10">
-          <Gauge class="w-6 h-6 text-[#ff1e42] mb-4" />
-          <span class="text-4xl font-[1000] text-slate-900 dark:text-white italic tracking-tighter leading-none">-25%</span>
-          <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-2">Fuel Cons. Reduction</p>
-        </div>
-
-        <div class="md:col-span-2 group relative bg-white dark:bg-[#000a3d]/40 border border-slate-200 dark:border-white/10 p-6 flex items-center gap-6 overflow-hidden">
-          <div class="w-12 h-12 bg-[#ff1e42]/10 flex items-center justify-center rounded-lg">
-            <Database class="w-6 h-6 text-[#ff1e42]" />
+          <div class="w-full space-y-2">
+            <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors">
+              {{ stat.label }}
+            </p>
+            <div class="h-[1px] w-8 bg-slate-200 dark:bg-white/10 group-hover:w-full group-hover:bg-rose-500 transition-all duration-700"></div>
           </div>
-          <div>
-            <div class="flex items-baseline gap-2">
-              <span class="text-3xl font-[1000] text-slate-900 dark:text-white italic">100%</span>
-              <span class="text-[9px] font-black text-[#ff1e42] uppercase tracking-tighter">Verified</span>
-            </div>
-            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Master Data Accuracy</p>
-          </div>
-        </div>
 
+        </div>
       </div>
+
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, markRaw } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { TrendingUp, ShieldCheck, Gauge, Database } from 'lucide-vue-next'
+// Minimalistic icons
+import { Zap, ShieldCheck, TrendingUp, Cpu, Globe, Activity } from 'lucide-vue-next'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const impactStats = [
-  { label: 'Reporting Speed', value: '40', suffix: '%', progress: 85 },
-  { label: 'Asset Visibility', value: '95', suffix: '%', progress: 95 },
-  { label: 'Cost Efficiency', value: '30', suffix: '%', progress: 70 }
+const headerRef = ref(null)
+
+const stats = [
+  { label: 'Network Speed', value: 40, decimals: 0, suffix: '%', icon: markRaw(Zap) },
+  { label: 'System Uptime', value: 99.9, decimals: 1, suffix: '%', icon: markRaw(ShieldCheck) },
+  { label: 'Data Latency', value: 12, decimals: 0, suffix: 'ms', icon: markRaw(Activity) },
+  { label: 'Global Reach', value: 15, decimals: 0, suffix: 'Nodes', icon: markRaw(Globe) },
+  { label: 'Processing', value: 3.5, decimals: 1, suffix: 'GHz', icon: markRaw(Cpu) },
+  { label: 'ROI Growth', value: 30, decimals: 0, suffix: '%', icon: markRaw(TrendingUp) }
 ]
 
-const headRef = ref(null)
-const gridRef = ref(null)
-
 onMounted(() => {
-  setTimeout(() => {
-    ScrollTrigger.refresh()
+  // Animate Header
+  gsap.from(headerRef.value, {
+    y: 20, opacity: 0, duration: 1, ease: 'power2.out',
+    scrollTrigger: { trigger: headerRef.value, start: 'top 90%' }
+  })
 
-    gsap.fromTo(headRef.value,
-      { x: -50, opacity: 0 },
-      {
-        x: 0, opacity: 1, duration: 1, ease: 'power3.out',
-        scrollTrigger: {
-          trigger: headRef.value,
-          start: 'top 95%',
-          once: true,
-          invalidateOnRefresh: true
-        }
+  // Animate Numbers
+  const counters = document.querySelectorAll('.counter')
+  counters.forEach(counter => {
+    const target = parseFloat(counter.getAttribute('data-target'))
+    const decimals = parseInt(counter.getAttribute('data-decimals'))
+    
+    let obj = { val: 0 }
+    gsap.to(obj, {
+      val: target,
+      duration: 2.5,
+      ease: 'expo.out',
+      scrollTrigger: {
+        trigger: counter,
+        start: 'top 95%',
+        once: true
+      },
+      onUpdate: () => {
+        counter.innerText = obj.val.toFixed(decimals)
       }
-    )
-
-    gsap.fromTo('.grid > div',
-      { y: 30, opacity: 0 },
-      {
-        y: 0, opacity: 1, stagger: 0.1, duration: 0.8, ease: 'power2.out',
-        scrollTrigger: {
-          trigger: gridRef.value,
-          start: 'top 95%',
-          once: true,
-          invalidateOnRefresh: true
-        }
-      }
-    )
-  }, 100)
+    })
+  })
 })
 </script>
 
 <style scoped>
-.grid > div {
-  transition: transform 0.3s ease;
+.minimal-impact-section {
+  @apply relative w-full py-20 bg-[#f8fafc] dark:bg-[#020617] transition-colors duration-700;
 }
-.grid > div:hover {
-  transform: translateY(-5px);
+
+/* Grid: 2 cols on mobile, 3 on tablet, 6 on desktop */
+.metrics-grid {
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-12 gap-y-16;
+}
+
+.metric-item {
+  @apply flex flex-col items-start;
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* Custom Selection Color */
+::selection {
+  background: #f43f5e;
+  color: white;
 }
 </style>

@@ -23,23 +23,24 @@
       </div>
 
       <div class="relative flex overflow-hidden py-12 mask-fade">
-        <div class="flex flex-nowrap gap-24 animate-marquee items-center">
+        <div class="flex flex-nowrap gap-6 animate-marquee items-center">
           <div 
             v-for="(client, index) in [...clients, ...clients]" 
             :key="index"
-            class="flex-shrink-0 w-80 h-40 relative group flex items-center justify-center"
+            class="flex-shrink-0 w-40 h-32 relative group flex items-center justify-center"
           >
-            <div class="absolute inset-0 scale-90 bg-[#ff1e42]/5 blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-full"></div>
+            <div class="absolute inset-0 scale-75 bg-[#ff1e42]/10 blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-full"></div>
             
             <div class="relative h-full w-full flex items-center justify-center p-4">
               <img 
                 :src="client.logo" 
                 :alt="client.name"
+                :style="client.scale ? { transform: `scale(${client.scale})` } : {}"
                 class="max-h-full max-w-full object-contain transition-all duration-700 group-hover:scale-110 opacity-100"
               />
             </div>
 
-            <span class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-[#ff1e42] text-white text-[10px] font-bold px-4 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none uppercase tracking-widest z-20 shadow-xl">
+            <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-[#ff1e42] text-white text-[9px] font-bold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none uppercase tracking-widest z-20 shadow-xl whitespace-nowrap">
               {{ client.name }}
             </span>
           </div>
@@ -65,19 +66,26 @@ const clients = ref([
   { id: 3, name: 'Ombilin Energi', logo: new URL('../assets/logo/OE.png', import.meta.url).href },
   { id: 4, name: 'Trans Energi Indonesia', logo: new URL('../assets/logo/TEI.png', import.meta.url).href },
   { id: 5, name: 'Timur Satria Perkasa', logo: new URL('../assets/logo/TSP.png', import.meta.url).href },
-  { id: 6, name: 'Fajar Surya Swadaya', logo: new URL('../assets/logo/FJS.png', import.meta.url).href }
+  { id: 6, name: 'Fajar Surya Swadaya', logo: new URL('../assets/logo/FJS.png', import.meta.url).href, scale: 1.25 }
 ])
 
 onMounted(() => {
   setTimeout(() => {
     ScrollTrigger.refresh()
-    gsap.fromTo(headerRef.value,
-      { y: 40, opacity: 0 },
-      {
-        y: 0, opacity: 1, duration: 1.2, ease: 'power4.out',
-        scrollTrigger: { trigger: headerRef.value, start: 'top 95%', once: true, invalidateOnRefresh: true }
-      }
-    )
+    if (headerRef.value) {
+      gsap.fromTo(headerRef.value,
+        { y: 40, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 1.2, ease: 'power4.out',
+          scrollTrigger: { 
+            trigger: headerRef.value, 
+            start: 'top 95%', 
+            once: true, 
+            invalidateOnRefresh: true 
+          }
+        }
+      )
+    }
   }, 100)
 })
 </script>
@@ -88,17 +96,24 @@ onMounted(() => {
   width: max-content;
   animation: marquee 40s linear infinite;
 }
+
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
 .mask-fade {
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
+
+/* Efek hover default untuk memperbesar sedikit (berlaku untuk semua) */
 .group:hover img {
-  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.12));
+  filter: drop-shadow(0 10px 15px rgba(255, 30, 66, 0.15));
+  /* Jika logo FJS di-hover, dia akan dikalikan lagi skalanya dari 1.25 menjadi sekitar 1.37 */
+  transform: scale(1.1) !important; 
 }
 </style>

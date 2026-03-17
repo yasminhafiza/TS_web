@@ -1,78 +1,79 @@
 <template>
-  <section id="about" class="relative w-full py-24 lg:py-32 bg-[#f8fbff] dark:bg-[#000839] overflow-hidden transition-colors duration-500">
+  <section id="about" class="relative w-full py-24 lg:py-32 bg-[#f0f4f8] dark:bg-[#020617] overflow-hidden transition-colors duration-700">
     
     <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-10 left-10 w-[300px] h-[300px] bg-[#ff1e42]/5 rounded-full blur-[100px]"></div>
-      <div class="absolute bottom-10 right-10 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px]"></div>
-      <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] tech-grid"></div>
+      <div class="absolute top-20 right-[10%] w-32 h-32 animate-float-slow opacity-20 dark:opacity-30">
+        <svg viewBox="0 0 24 24" fill="none" class="w-full h-full text-rose-500">
+          <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="0.5"/>
+          <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z" stroke="currentColor" stroke-width="0.5"/>
+        </svg>
+      </div>
+
+      <div class="absolute -left-20 top-1/3 w-64 h-96 bg-white/20 dark:bg-blue-500/5 rounded-[40px] rotate-12 blur-sm border border-white/30 dark:border-white/5"></div>
       
-      <div class="absolute left-4 top-1/4 h-64 w-px bg-gradient-to-b from-transparent via-[#ff1e42]/40 to-transparent hidden lg:block"></div>
-      <div class="absolute right-4 bottom-1/4 h-64 w-px bg-gradient-to-b from-transparent via-blue-500/40 to-transparent hidden lg:block"></div>
+      <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-rose-500/[0.08] dark:bg-rose-500/[0.1] rounded-full blur-[120px]"></div>
+      <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/[0.08] dark:bg-blue-600/[0.1] rounded-full blur-[120px]"></div>
+
+      <div class="absolute inset-0 opacity-[0.2] dark:opacity-[0.4]" 
+           style="background-image: radial-gradient(#64748b 0.5px, transparent 0.5px); background-size: 50px 50px;">
+      </div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         
-        <div class="relative group w-full">
-          <h2 class="text-4xl md:text-5xl font-[1000] text-slate-800 dark:text-white mb-8 tracking-tight leading-[1.2] uppercase italic">
-            TECHNOLOGY <br/>
-            DRIVEN BY <br/>
-            <span class="inline-block pr-8 text-glow-red text-transparent bg-clip-text bg-gradient-to-r from-[#ff1e42] via-rose-500 to-rose-400">
-              HUMAN INTEGRITY
-            </span>
-          </h2>
-          
-          <div class="relative p-8 bg-white dark:bg-blue-950/20 border border-slate-200 dark:border-blue-400/20 backdrop-blur-md mb-10 group/box transition-all hover:border-[#ff1e42]/50">
-            <div class="absolute top-0 left-0 w-full h-[2px] bg-[#ff1e42] animate-scan opacity-40 z-20"></div>
-            <div class="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-[#ff1e42]"></div>
-            <div class="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-[#ff1e42]"></div>
+        <div class="lg:col-span-7 space-y-10">
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+              <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Our Identity</span>
+            </div>
             
-            <p class="text-base text-slate-600 dark:text-blue-100/70 leading-relaxed font-medium relative z-10">
+            <h2 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-[0.9] tracking-tighter uppercase">
+              Technology <br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-rose-600">Precision.</span>
+            </h2>
+            
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed font-medium border-l-4 border-rose-500 pl-6">
               <span class="text-slate-900 dark:text-white font-bold italic">Technology Services</span> 
-              is a dedicated unit within <span class="text-[#ff1e42] font-bold">PT Solusi Daya Indonesia</span> providing world-class IT infrastructure. We integrate high-level technical precision with social empathy and robust safety protocols. <span class="animate-pulse text-[#ff1e42]">_</span>
+              is a dedicated unit within <span class="text-rose-500 font-bold">PT Solusi Daya Indonesia</span>. We bridge the gap between complex infrastructure and human-centric solutions.
             </p>
           </div>
 
-          <div class="space-y-6 max-w-md">
-            <div v-for="(item, index) in values" :key="index" class="group/item">
-              <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center gap-3">
-                  <div class="w-1.5 h-1.5 bg-[#ff1e42] rotate-45 group-hover:scale-125 transition-transform"></div>
-                  <span class="text-[11px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">{{ item.title }}</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div v-for="(item, index) in values" :key="index" class="group p-4 bg-white/40 dark:bg-white/5 rounded-2xl border border-white dark:border-white/10 backdrop-blur-sm hover:scale-[1.02] transition-transform duration-300">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-500">
+                  <component :is="item.icon" class="w-4 h-4" />
                 </div>
-                <span class="text-[#ff1e42] font-mono text-[9px] opacity-0 group-hover/item:opacity-100 transition-opacity">SECURE_SYNC</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-slate-200">{{ item.title }}</span>
               </div>
-              <div class="h-1 w-full bg-slate-200 dark:bg-blue-900/30 overflow-hidden relative border dark:border-white/5">
-                <div class="absolute inset-0 bg-gradient-to-r from-[#ff1e42] to-rose-500 w-0 group-hover/item:w-full transition-all duration-[1.5s] ease-out"></div>
+              <div class="h-1 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div class="h-full bg-rose-500 w-0 group-hover:w-full transition-all duration-1000 ease-out"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="relative perspective-2000 lg:pl-10">
-          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-[#ff1e42]/10 blur-[120px] animate-pulse"></div>
-
-          <div class="grid grid-cols-2 gap-4 relative z-10 rotate-y-[-10deg] hover:rotate-y-0 transition-all duration-1000">
+        <div class="lg:col-span-5 relative">
+          <div class="grid grid-cols-2 gap-6 perspective-2000">
             <div 
               v-for="(stat, idx) in stats" 
               :key="idx" 
-              :class="[
-                'stat-card group relative p-6 rounded-none border-r-2 border-b-2 bg-white dark:bg-blue-900/10 border-slate-300 dark:border-blue-400/10 backdrop-blur-xl transition-all duration-500',
-                idx % 2 === 1 ? 'translate-y-8' : ''
-              ]"
+              class="stat-card relative p-8 rounded-[32px] bg-white dark:bg-white/5 border border-white dark:border-white/10 shadow-xl dark:shadow-2xl transition-all duration-500 hover:translate-z-10"
+              :class="idx % 2 === 1 ? 'lg:mt-12' : ''"
+              @mousemove="handleCardTilt($event, idx)"
+              @mouseleave="resetCardTilt(idx)"
+              :ref="el => { if (el) cardRefs[idx] = el }"
             >
-              <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-slate-400 dark:border-white/20 group-hover:border-[#ff1e42]"></div>
-              
-              <div class="text-3xl md:text-5xl font-black text-slate-800 dark:text-white mb-1 tracking-tighter transition-all italic group-hover:text-[#ff1e42]">
+              <div class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2 tracking-tighter italic">
                 {{ stat.value }}
               </div>
-              
-              <div class="text-[9px] text-slate-500 dark:text-blue-300/60 font-black uppercase tracking-[0.15em] mb-4">
+              <div class="text-[10px] font-black uppercase tracking-widest text-rose-500">
                 {{ stat.label }}
               </div>
-              
-              <div class="relative h-[2px] w-full bg-slate-100 dark:bg-white/5 overflow-hidden">
-                <div class="absolute inset-0 bg-[#ff1e42] -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
+              <div class="absolute top-0 right-0 p-4 opacity-10">
+                <div class="w-8 h-8 border-t-2 border-r-2 border-slate-900 dark:border-white"></div>
               </div>
             </div>
           </div>
@@ -84,65 +85,89 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { gsap } from 'gsap'
+import { Shield, Target, Heart, Cpu } from 'lucide-vue-next'
+
+const cardRefs = ref([])
+
 const values = [
-  { title: 'Technical Precision' },
-  { title: 'Social Empathy' },
-  { title: 'Safety Protocol' },
-  { title: 'Human Integrity' }
+  { title: 'Technical Precision', icon: Cpu },
+  { title: 'Social Empathy', icon: Heart },
+  { title: 'Safety Protocol', icon: Shield },
+  { title: 'Human Integrity', icon: Target }
 ]
 
 const stats = [
-  { value: '15+', label: 'Years Experience' },
-  { value: '500+', label: 'Projects Delivered' },
+  { value: '15+', label: 'Years Exp' },
+  { value: '500+', label: 'Projects' },
   { value: 'PRO', label: 'Tech Expert' },
-  { value: '100%', label: 'Safety Record' }
+  { value: '100%', label: 'Safety' }
 ]
+
+const handleCardTilt = (e, i) => {
+  const card = cardRefs.value[i]
+  const rect = card.getBoundingClientRect()
+  const x = (e.clientX - rect.left) / rect.width - 0.5
+  const y = (e.clientY - rect.top) / rect.height - 0.5
+  
+  gsap.to(card, {
+    rotateY: x * 15,
+    rotateX: -y * 15,
+    z: 20,
+    duration: 0.4,
+    ease: 'power2.out'
+  })
+}
+
+const resetCardTilt = (i) => {
+  gsap.to(cardRefs.value[i], {
+    rotateY: 0,
+    rotateX: 0,
+    z: 0,
+    duration: 0.8,
+    ease: 'elastic.out(1, 0.6)'
+  })
+}
 </script>
 
 <style scoped>
-.tech-grid {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, currentColor 1px, transparent 1px),
-    linear-gradient(to bottom, currentColor 1px, transparent 1px);
-}
-
-.text-glow-red {
-  filter: drop-shadow(0 0 10px rgba(255, 30, 66, 0.4));
-}
-
-.stat-card {
-  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.03);
-}
-
-.dark .stat-card {
-  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.2);
-}
-
-.stat-card:hover {
-  transform: translate(-5px, -5px);
-  box-shadow: 15px 15px 0px rgba(255, 30, 66, 0.15);
-}
-
-@keyframes scan {
-  0% { top: 0%; opacity: 0; }
-  50% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
-}
-
-.animate-scan {
-  animation: scan 3s linear infinite;
-}
-
+/* 3D Perspective Setup */
 .perspective-2000 {
   perspective: 2000px;
 }
 
-.rotate-y-\[-10deg\] {
-  transform: rotateY(-10deg);
+.stat-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
-.transition-all {
-  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+/* Background Animations */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(12deg) scale(1); }
+  50% { transform: translateY(-30px) rotate(15deg) scale(1.1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -20px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Custom Depth shadow for light mode */
+.bg-white\/40 {
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+::selection {
+  background: #f43f5e;
+  color: white;
 }
 </style>

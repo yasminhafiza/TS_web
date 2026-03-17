@@ -1,193 +1,112 @@
 <template>
   <section
     id="hero"
-    class="relative min-h-screen flex items-center bg-[#f0f4f9] dark:bg-[#000839]"
+    class="relative min-h-screen flex items-center bg-[#f8fafc] dark:bg-[#020617] overflow-hidden"
     @mousemove="handleMouseMove"
   >
     <div class="absolute inset-0 pointer-events-none">
-      <div class="hero-grid absolute inset-0 opacity-[0.04] dark:opacity-[0.08]"></div>
+      <div class="hero-grid absolute inset-0 opacity-[0.03] dark:opacity-[0.1]"></div>
+      
+      <div 
+        class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-rose-500/10 rounded-full blur-[120px] animate-pulse"
+      ></div>
+      <div 
+        class="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]"
+      ></div>
+
       <div
-        class="absolute inset-0"
+        class="absolute inset-0 transition-opacity duration-500"
         :style="{
-          background: `radial-gradient(800px circle at ${mouseRawX}px ${mouseRawY}px, rgba(255,30,66,0.06), transparent 60%)`,
+          background: `radial-gradient(600px circle at ${mouseRawX}px ${mouseRawY}px, rgba(244, 63, 94, 0.07), transparent 70%)`,
         }"
-      ></div>
-      <div
-        class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-rose-500/5 dark:bg-rose-500/10 rounded-full blur-[120px]"
-      ></div>
-      <div
-        class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-blue-500/5 dark:bg-blue-600/10 rounded-full blur-[100px]"
       ></div>
     </div>
 
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-28 pb-16">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-
-        <!-- KIRI -->
-        <div class="space-y-8 relative z-20 hero-left">
-
-          <div
-            class="inline-flex items-center gap-2 px-4 py-2 bg-rose-500/10 dark:bg-rose-500/20 border border-rose-500/20 text-rose-600 dark:text-rose-400"
-          >
-            <span class="w-2 h-2 bg-rose-500 rounded-full animate-pulse"></span>
-            <span class="text-[10px] font-black uppercase tracking-[0.3em]"
-              >IT Services — SDI Technology</span
-            >
-          </div>
-
-          <h1
-            class="text-5xl lg:text-7xl font-black leading-[0.9] tracking-tighter uppercase text-slate-900 dark:text-white"
-          >
-            YOUR<br />
-            VISION<br />
-            <span class="text-rose-500 italic">ENGINEERED</span>
-          </h1>
-
-          <p
-            class="text-slate-600 dark:text-blue-200/70 text-base leading-relaxed max-w-md border-l-2 border-rose-500/30 pl-4"
-          >
-            We architect competitive advantages — from enterprise ERP to network
-            infrastructure. End-to-end IT solutions that power Indonesia's leading
-            industries.
-          </p>
-
-          <div class="grid grid-cols-2 gap-3">
-            <div
-              v-for="point in servicePoints"
-              :key="point.label"
-              class="flex items-center gap-3 px-4 py-3 bg-white/60 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-sm hover:border-rose-500/40 transition-all duration-300 group"
-            >
-              <div
-                class="w-8 h-8 bg-slate-900 dark:bg-rose-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-rose-500 transition-colors"
-              >
-                <component
-                  :is="point.icon"
-                  class="w-4 h-4 text-rose-500 group-hover:text-white transition-colors"
-                />
-              </div>
-              <span
-                class="text-[11px] font-black uppercase tracking-wider text-slate-600 dark:text-slate-300"
-                >{{ point.label }}</span
-              >
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        
+        <div class="space-y-10 hero-left">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/5 border border-rose-500/10 text-rose-500">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+              </span>
+              <span class="text-[11px] font-bold uppercase tracking-widest">Digital Transformation Partner</span>
             </div>
+            
+            <h1 class="text-6xl lg:text-8xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[0.85]">
+              FUTURE<br />
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-rose-600">DEFINED.</span>
+            </h1>
+            
+            <p class="text-lg text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
+              Kami membangun infrastruktur digital yang tangguh dan solusi IT cerdas untuk mengakselerasi bisnis Anda di era modern.
+            </p>
           </div>
 
 
-
-          <div class="flex gap-8 pt-4 border-t border-slate-200 dark:border-white/10">
-            <div v-for="stat in stats" :key="stat.label">
-              <div class="text-2xl font-black text-slate-900 dark:text-white">
-                {{ stat.value }}
-              </div>
-              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                {{ stat.label }}
-              </div>
+          <div class="flex gap-12">
+            <div v-for="stat in stats" :key="stat.label" class="group">
+              <div class="text-3xl font-black text-slate-900 dark:text-white group-hover:text-rose-500 transition-colors">{{ stat.value }}</div>
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-400">{{ stat.label }}</div>
             </div>
           </div>
         </div>
 
-        <!-- KANAN -->
-        <div class="relative flex items-center justify-center h-[580px] z-10 hero-right">
-
-          <!-- Tilt wrapper — transform hanya dari mouse, TIDAK ada initial offset -->
+        <div class="relative flex items-center justify-center h-[600px] hero-right">
+          
           <div
-            class="relative w-full max-w-[380px] h-full"
+            class="relative w-full max-w-[420px] perspective-1000"
             :style="{
               transform: `rotateY(${tiltX}deg) rotateX(${tiltY}deg)`,
-              transition: 'transform 0.1s ease-out',
+              transition: 'transform 0.2s ease-out',
             }"
           >
+            <div class="absolute inset-0 bg-white/40 dark:bg-white/5 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-[40px] shadow-2xl"></div>
 
-            <!-- Main card -->
-            <div
-              class="absolute inset-x-0 top-[8%] bg-white dark:bg-[#000a3d] border border-slate-200 dark:border-blue-900/50 p-6 shadow-2xl"
-            >
-              <div class="flex items-center justify-between mb-6">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 rounded-full bg-rose-500"></div>
-                  <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-                  <div class="w-3 h-3 rounded-full bg-green-400"></div>
+            <div class="relative p-8 space-y-6">
+              <div class="flex justify-between items-center">
+                <div class="w-12 h-12 bg-rose-500 rounded-2xl flex items-center justify-center shadow-lg shadow-rose-500/40">
+                  <Zap class="text-white w-6 h-6" />
                 </div>
-                <span
-                  class="text-[9px] font-mono text-slate-400 dark:text-blue-400/60 uppercase tracking-widest"
-                  >sdi_services.exe</span
-                >
+                <div class="text-right">
+                  <div class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">System Status</div>
+                  <div class="text-xs font-bold text-green-500 flex items-center gap-1 justify-end">
+                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Optimal
+                  </div>
+                </div>
               </div>
 
-              <div class="font-mono text-[11px] space-y-2 mb-6">
-                <div class="text-slate-400 dark:text-blue-400/50">
-                  // SDI Technology Stack
-                </div>
-                <div>
-                  <span class="text-rose-500">const</span>
-                  <span class="text-slate-700 dark:text-blue-200"> services</span>
-                  <span class="text-slate-400"> =</span>
-                  <span class="text-green-600 dark:text-green-400"> [</span>
-                </div>
-                <div
-                  v-for="(svc, i) in codeLines"
+              <div class="space-y-3">
+                <div 
+                  v-for="(item, i) in servicePoints.slice(0, 4)" 
                   :key="i"
-                  class="pl-4 flex items-center gap-2 py-1 transition-all duration-300 cursor-default"
-                  :class="
-                    activeService === i
-                      ? 'bg-rose-500/10 border-l-2 border-rose-500'
-                      : 'border-l-2 border-transparent'
-                  "
-                  @mouseenter="activeService = i"
+                  class="p-4 rounded-2xl bg-white/50 dark:bg-white/5 border border-white/50 dark:border-white/10 flex items-center gap-4 group hover:bg-rose-500 transition-all duration-300 cursor-pointer"
                 >
-                  <span class="text-slate-400 dark:text-blue-400/40 text-[9px]">{{
-                    String(i + 1).padStart(2, '0')
-                  }}</span>
-                  <span class="text-amber-600 dark:text-amber-400">"{{ svc }}"</span>
-                  <span v-if="i < codeLines.length - 1" class="text-slate-400">,</span>
-                  <span v-if="activeService === i" class="ml-auto text-[9px] text-rose-500 font-bold"
-                    >▶ ACTIVE</span
-                  >
+                  <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-white/10 flex items-center justify-center group-hover:bg-white/20">
+                    <component :is="item.icon" class="w-5 h-5 text-slate-600 dark:text-slate-300 group-hover:text-white" />
+                  </div>
+                  <span class="font-bold text-sm text-slate-700 dark:text-slate-200 group-hover:text-white">{{ item.label }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="absolute -top-10 -right-6 z-20 animate-float">
+              <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl border border-slate-100 dark:border-white/10">
+                <div class="text-2xl font-black text-rose-500">20+</div>
+                <div class="text-[9px] font-bold uppercase text-slate-400">Trusted Clients</div>
+              </div>
+            </div>
+
+            <div class="absolute -bottom-8 -left-8 z-20 animate-float-slow">
+              <div class="bg-slate-900 dark:bg-white p-5 rounded-2xl shadow-xl flex items-center gap-4">
+                <div class="w-10 h-10 bg-rose-500 rounded-full flex items-center justify-center">
+                  <Shield class="text-white w-5 h-5" />
                 </div>
                 <div>
-                  <span class="text-green-600 dark:text-green-400">]</span>
-                </div>
-              </div>
-
-              <div
-                class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-white/10"
-              >
-                <div class="flex items-center gap-2">
-                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span class="text-[10px] font-mono text-slate-500 dark:text-blue-300/50"
-                    >System Online</span
-                  >
-                </div>
-                <span class="text-[10px] font-mono text-rose-500">99.9% uptime</span>
-              </div>
-            </div>
-
-            <!-- Badge 1 — top right -->
-            <div class="absolute -top-6 right-0 z-20 animate-float">
-              <div
-                class="bg-rose-500 text-white px-4 py-3 shadow-[0_10px_30px_rgba(255,30,66,0.4)]"
-              >
-                <div class="text-2xl font-black leading-none">5+</div>
-                <div class="text-[9px] font-bold uppercase tracking-wider opacity-80">Years Exp</div>
-              </div>
-            </div>
-
-            <!-- Badge 2 — bottom left -->
-            <div class="absolute bottom-10 -left-4 z-20 animate-float-slow">
-              <div class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-3 shadow-xl">
-                <div class="text-2xl font-black leading-none">20+</div>
-                <div class="text-[9px] font-bold uppercase tracking-wider opacity-60">Projects</div>
-              </div>
-            </div>
-
-            <!-- Badge 3 — bottom right -->
-            <div class="absolute bottom-4 right-0 z-20 animate-float-mid">
-              <div
-                class="bg-white dark:bg-[#000a3d] border border-slate-200 dark:border-rose-500/30 px-4 py-3 shadow-xl"
-              >
-                <div class="text-2xl font-black leading-none text-rose-500">100%</div>
-                <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
-                  Safety Record
+                  <div class="text-sm font-black text-white dark:text-slate-900 italic">SECURE</div>
+                  <div class="text-[9px] font-bold uppercase text-slate-400">Enterprise Grade</div>
                 </div>
               </div>
             </div>
@@ -201,19 +120,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Server, Shield, Smartphone, Monitor, Network, Users, Zap } from 'lucide-vue-next'
+import { Server, Shield, Smartphone, Network, Zap, Cpu, Globe } from 'lucide-vue-next'
 
-// ✅ FIX: Mouse raw position diinit ke tengah layar agar radial gradient tidak mulai dari (0,0)
-const mouseRawX = ref(typeof window !== 'undefined' ? window.innerWidth / 2 : 760)
-const mouseRawY = ref(typeof window !== 'undefined' ? window.innerHeight / 2 : 400)
-
-// ✅ FIX: tiltX & tiltY diinit ke 0 — tidak ada initial offset yang menyembunyikan konten
+const mouseRawX = ref(0)
+const mouseRawY = ref(0)
 const tiltX = ref(0)
 const tiltY = ref(0)
 
-const activeService = ref(0)
-
-// ✅ FIX: Set mouseRawX/Y ke tengah layar saat mount agar hero langsung tampil sempurna
 onMounted(() => {
   mouseRawX.value = window.innerWidth / 2
   mouseRawY.value = window.innerHeight / 2
@@ -222,78 +135,57 @@ onMounted(() => {
 const handleMouseMove = (e) => {
   mouseRawX.value = e.clientX
   mouseRawY.value = e.clientY
-  // ✅ FIX: Tilt dihitung relatif terhadap section, bukan window,
-  //    sehingga tidak ada lompatan posisi saat pertama kali mouse masuk
+  
   const rect = e.currentTarget.getBoundingClientRect()
   const centerX = rect.left + rect.width / 2
   const centerY = rect.top + rect.height / 2
-  tiltX.value = (e.clientX - centerX) / 150
-  tiltY.value = -((e.clientY - centerY) / 150)
+  
+  // Efek tilt yang lebih smooth
+  tiltX.value = (e.clientX - centerX) / 40
+  tiltY.value = -((e.clientY - centerY) / 40)
 }
 
 const servicePoints = [
-  { label: 'ERP Systems', icon: Server },
-  { label: 'Network Infra', icon: Network },
-  { label: 'Web & Mobile', icon: Smartphone },
-  { label: 'End-User Support', icon: Monitor },
-  { label: 'Cybersecurity', icon: Shield },
-  { label: 'IT Consulting', icon: Users },
-]
-
-const codeLines = [
-  'Core ERP & Reporting',
-  'Corporate Application',
-  'Web & Mobile Apps',
-  'Network Infrastructure',
-  'Productivity Suite',
-  'End-User Touchpoint',
+  { label: 'Corporate Application', icon: Globe },
+  { label: 'Enterprise ERP', icon: Server },
+  { label: 'Network Infrastructure', icon: Shield },
+  { label: 'Productivity', icon: Cpu },
 ]
 
 const stats = [
   { value: '5+', label: 'Years' },
-  { value: '20+', label: 'Projects' },
-  { value: '99.9%', label: 'Uptime' },
+  { value: '24/7', label: 'Support' },
+  { value: '100%', label: 'Safety' },
 ]
 </script>
 
 <style scoped>
+.perspective-1000 {
+  perspective: 1000px;
+}
+
 .hero-grid {
-  background-size: 50px 50px;
-  background-image:
+  background-size: 40px 40px;
+  background-image: 
     linear-gradient(to right, currentColor 1px, transparent 1px),
     linear-gradient(to bottom, currentColor 1px, transparent 1px);
 }
 
-section {
-  user-select: none;
-}
-
-/* ✅ FIX: Pastikan hero-left dan hero-right SELALU visible dari awal
-   Tidak ada opacity:0, translateY, atau visibility:hidden di initial state */
-.hero-left,
-.hero-right {
-  opacity: 1 !important;
-  transform: none;
-  visibility: visible !important;
-}
-
-/* Float animations untuk badge */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
 }
 
 @keyframes float-slow {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-6px); }
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(15px) scale(1.05); }
 }
 
-@keyframes float-mid {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
-}
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
 
-.animate-float     { animation: float      4s ease-in-out infinite; }
-.animate-float-slow{ animation: float-slow 6s ease-in-out infinite; }
-.animate-float-mid { animation: float-mid  5s ease-in-out infinite; }
+/* Menghilangkan seleksi teks agar pengalaman interaktif lebih enak */
+section {
+  user-select: none;
+}
 </style>

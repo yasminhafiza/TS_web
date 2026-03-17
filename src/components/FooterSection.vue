@@ -33,7 +33,7 @@
 
         <div class="lg:col-span-3">
           <h4 class="text-[11px] font-black text-slate-800 dark:text-white uppercase tracking-[0.25em] mb-10 flex items-center gap-3 transition-colors duration-500">
-            Core Services
+            IT Services
             <span class="w-8 h-[1px] bg-blue-500/50"></span>
           </h4>
           <ul class="space-y-5">
@@ -61,7 +61,7 @@
             </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 space-y-4 transition-colors duration-500">
+      <!-- <div class="p-6 rounded-2xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 space-y-4 transition-colors duration-500">
             <h5 class="text-xs font-bold text-slate-800 dark:text-gray-200 uppercase tracking-widest transition-colors duration-500">Stay Updated</h5>
             <div class="relative">
               <input type="email" placeholder="Enter business email" 
@@ -70,7 +70,7 @@
                 <ArrowRight class="w-4 h-4" />
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
 
       </div>
@@ -115,11 +115,12 @@ import {
 } from 'lucide-vue-next'
 
 const services = [
-  'Enterprise Resource Planning',
+  'Core Application & Reporting',
+  'Corporate Application',
   'Network Infrastructure',
-  'Cybersecurity Strategy',
-  'Managed IT Services',
-  'Digital Transformation'
+  'Web & Mobile Application',
+  'Productivity',
+  'End User Touchpoint'
 ]
 
 const socialLinks = [
