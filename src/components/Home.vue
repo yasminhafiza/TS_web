@@ -1,7 +1,10 @@
 <template>
   <div class="relative w-full bg-[#f8fbff] dark:bg-[#000830]">
     <Navbar />
-    <Hero />
+    
+    <section id="hero">
+      <Hero />
+    </section>
 
     <main class="relative z-10">
       <section id="services" class="relative">
@@ -12,11 +15,10 @@
         <AboutSection />
       </section>
 
-
       <div class="bg-slate-50/50 dark:bg-[#000a3d]/30 py-20 space-y-32">
         <section id="impacts" class="relative">
-          <OurImpacts />
-        </section>
+          </section>
+        
         <section id="testimonials" class="scroll-reveal">
           <Testimonials />
         </section>
@@ -24,8 +26,9 @@
 
       <div class="py-20 border-y border-slate-200 dark:border-white/5">
         <ClientTrust />
-        <PartnerCloud class="mt-20" />
+        <Enterprise class="mt-20" />
       </div>
+
       <section id="why-choose" class="relative">
         <WhyChooseUs />
       </section>
@@ -42,13 +45,14 @@
 import { onMounted, nextTick } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// Components
 import Navbar from './Navbar.vue'
 import Hero from './Hero.vue'
 import Service from './Service.vue'
 import AboutSection from './AboutSection.vue'
-import OurImpacts from './OurImpacts.vue'
 import Testimonials from './Testimonials.vue'
-import PartnerCloud from './PartnerCloud.vue'
+import Enterprise from './Enterprise.vue'
 import ClientTrust from './ClientTrust.vue'
 import WhyChooseUs from './WhyChooseUs.vue'
 import CTASection from './CTASection.vue'
@@ -68,8 +72,8 @@ onMounted(async () => {
 
   document.documentElement.classList.add('js-ready')
 
+  // Intersection Observer for Scroll Reveal
   const targets = document.querySelectorAll('.scroll-reveal')
-
   if (!('IntersectionObserver' in window)) {
     targets.forEach(el => el.classList.add('in-view'))
     return
@@ -92,10 +96,21 @@ onMounted(async () => {
 </script>
 
 <style>
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset for fixed navbar so content isn't hidden behind it */
+section {
+  scroll-margin-top: 100px;
+}
+
 .js-ready .scroll-reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 

@@ -24,10 +24,7 @@
         
         <div class="lg:col-span-7 space-y-10">
           <div class="space-y-6">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm">
-              <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-              <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">Our Identity</span>
-            </div>
+           
             
             <h2 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-[0.9] tracking-tighter uppercase">
               Technology <br/>
@@ -91,12 +88,12 @@ import { Shield, Target, Heart, Cpu } from 'lucide-vue-next'
 
 const cardRefs = ref([])
 
-const values = [
+/*const values = [
   { title: 'Technical Precision', icon: Cpu },
   { title: 'Social Empathy', icon: Heart },
   { title: 'Safety Protocol', icon: Shield },
   { title: 'Human Integrity', icon: Target }
-]
+]*/
 
 const stats = [
   { value: '15+', label: 'Years Exp' },

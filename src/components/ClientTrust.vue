@@ -10,7 +10,6 @@
         <div class="max-w-2xl">
           <div class="flex items-center gap-3 mb-4">
             <span class="w-12 h-[1px] bg-[#ff1e42]"></span>
-            <span class="text-[11px] font-bold text-[#ff1e42] uppercase tracking-[0.3em]">Global Partnerships</span>
           </div>
           <h2 class="text-4xl md:text-6xl font-black text-slate-800 dark:text-white leading-none tracking-tighter">
             OUR <br/>

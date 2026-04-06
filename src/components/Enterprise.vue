@@ -9,11 +9,11 @@
         <div class="max-w-2xl text-left">
           <div class="flex items-center gap-3 mb-4">
             <span class="w-12 h-[1px] bg-[#ff1e42]"></span>
-            <span class="text-[11px] font-bold text-[#ff1e42] uppercase tracking-[0.3em]">Integrations</span>
+           <!-- <span class="text-[11px] font-bold text-[#ff1e42] uppercase tracking-[0.3em]">Enterprise Services</span> -->
           </div>
           <h2 class="text-4xl md:text-6xl font-black text-slate-800 dark:text-white leading-none tracking-tighter">
-            OUR <br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff1e42] to-[#ff8095]">ECOSYSTEM.</span>
+            OUR<br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ff1e42] to-[#ff8095]">ENTERPRISE SERVICES</span>
           </h2>
         </div>
         <p class="text-slate-500 dark:text-slate-300 max-w-xs text-sm leading-relaxed border-l border-slate-200 dark:border-white/10 pl-6 uppercase tracking-wider font-medium">

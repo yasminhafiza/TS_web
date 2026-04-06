@@ -16,9 +16,7 @@
     <div class="container mx-auto px-6 relative z-10">
       
       <div class="flex flex-col items-center text-center mb-24 space-y-6">
-        <div class="px-4 py-1.5 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-sm backdrop-blur-md">
-          <span class="text-[10px] font-black uppercase tracking-[0.3em] text-rose-600 dark:text-rose-400">Expertise & Solutions</span>
-        </div>
+ 
         <h2 class="text-6xl md:text-8xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.8]">
           OUR <span class="text-transparent bg-clip-text bg-gradient-to-b from-rose-500 to-rose-700">SERVICES.</span>
         </h2>

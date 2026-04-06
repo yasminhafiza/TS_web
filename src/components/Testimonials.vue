@@ -23,10 +23,7 @@
     <div class="relative z-10 max-w-6xl mx-auto px-6">
       
       <div class="flex flex-col items-center text-center mb-24 space-y-4" ref="headerRef">
-        <div class="flex items-center gap-2 px-3 py-1 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full shadow-sm">
-          <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
-          <span class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 dark:text-slate-400">Collaborations</span>
-        </div>
+        
         <h2 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white uppercase tracking-tighter italic leading-none">
           Wall of <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-orange-600">Trust.</span>
         </h2>

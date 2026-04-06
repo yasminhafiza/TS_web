@@ -1,15 +1,15 @@
 <template>
   <nav
     :class="[
-      'fixed left-0 right-0 z-50',
+      'fixed left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]',
       isScrolled 
-        ? 'top-4 mx-auto max-w-[95%] lg:max-w-[85%] rounded-full bg-white/80 dark:bg-[#000524]/80 backdrop-blur-2xl border border-black/5 dark:border-white/10 shadow-lg py-3 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]' 
+        ? 'top-4 mx-auto max-w-[95%] lg:max-w-[85%] rounded-full bg-white/80 dark:bg-[#000524]/80 backdrop-blur-2xl border border-black/5 dark:border-white/10 shadow-lg py-3' 
         : 'top-0 bg-transparent py-6'
     ]"
   >
     <div class="container mx-auto px-8 flex items-center justify-between">
       <div class="flex-shrink-0">
-        <a href="#home" class="flex items-center gap-3 group">
+        <a href="#hero" class="flex items-center gap-3 group">
           <img 
             :src="sdiLogo" 
             alt="SDI Logo" 
@@ -55,11 +55,11 @@ const isScrolled = ref(false)
 const { isDark, toggleTheme } = useTheme()
 
 const navLinks = [
-  { name: 'Home', link: '#home' },
+  { name: 'Home', link: '#hero' },
   { name: 'Services', link: '#services' },
   { name: 'About', link: '#about' },
-  { name: 'Impact', link: '#impacts' },
-  { name: 'Testimonials', link: '#testimonials' }
+  { name: 'Testimonials', link: '#testimonials' },
+  { name: 'About', link: '#about' }
 ]
 
 const handleScroll = () => {

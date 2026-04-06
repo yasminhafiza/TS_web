@@ -27,13 +27,7 @@
         
         <div class="space-y-10 hero-left">
           <div class="space-y-4">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/5 border border-rose-500/10 text-rose-500">
-              <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-              </span>
-              <span class="text-[11px] font-bold uppercase tracking-widest">Digital Transformation Partner</span>
-            </div>
+            
             
             <h1 class="text-6xl lg:text-8xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[0.85]">
               FUTURE<br />
@@ -41,10 +35,9 @@
             </h1>
             
             <p class="text-lg text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
-              Kami membangun infrastruktur digital yang tangguh dan solusi IT cerdas untuk mengakselerasi bisnis Anda di era modern.
+              We build resilient digital infrastructure and intelligent IT solutions to accelerate your business in the modern era.
             </p>
           </div>
-
 
           <div class="flex gap-12">
             <div v-for="stat in stats" :key="stat.label" class="group">
@@ -140,7 +133,7 @@ const handleMouseMove = (e) => {
   const centerX = rect.left + rect.width / 2
   const centerY = rect.top + rect.height / 2
   
-  // Efek tilt yang lebih smooth
+  // Smoother tilt effect
   tiltX.value = (e.clientX - centerX) / 40
   tiltY.value = -((e.clientY - centerY) / 40)
 }
@@ -149,13 +142,13 @@ const servicePoints = [
   { label: 'Corporate Application', icon: Globe },
   { label: 'Enterprise ERP', icon: Server },
   { label: 'Network Infrastructure', icon: Shield },
-  { label: 'Productivity', icon: Cpu },
+  { label: 'Cloud Productivity', icon: Cpu },
 ]
 
 const stats = [
-  { value: '5+', label: 'Years' },
-  { value: '24/7', label: 'Support' },
-  { value: '100%', label: 'Safety' },
+  { value: '5+', label: 'Years Experience' },
+  { value: '24/7', label: 'Tech Support' },
+  { value: '100%', label: 'Safety Record' },
 ]
 </script>
 
@@ -184,7 +177,7 @@ const stats = [
 .animate-float { animation: float 5s ease-in-out infinite; }
 .animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
 
-/* Menghilangkan seleksi teks agar pengalaman interaktif lebih enak */
+/* Disable text selection for a better interactive experience */
 section {
   user-select: none;
 }
