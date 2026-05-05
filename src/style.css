@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    /* HAPUS transition-colors — ini penyebab flash saat load */
+  }
+
+  html {
+    background-color: #f8fbff;
+    @apply font-sans leading-relaxed;
+  }
+
+  body {
+    @apply text-slate-600 font-sans tracking-wide;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply tracking-tight;
+  }
+
+  html.dark {
+    background-color: #000524;
+    color-scheme: dark;
+  }
+
+  html.dark body {
+    @apply text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100 dark:bg-[#000c4d];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  }
+}
